@@ -1,4 +1,6 @@
-# aerophix
+# AeroPhix
+
+General aviation flight planner.
 
 ## Project setup
 ```
