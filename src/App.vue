@@ -11,10 +11,13 @@
           width="40"
         />
 
-        <h1 class="text-h4">AeroPhix</h1>
+        <v-toolbar-title class="text-h4">AeroPhix</v-toolbar-title>
       </div>
 
       <v-spacer></v-spacer>
+
+      <v-btn text to="/">Home</v-btn>
+      <v-btn text to="/about">About</v-btn>
 
       <v-btn icon>
         <v-icon>mdi-heart</v-icon>
@@ -26,23 +29,10 @@
     </v-app-bar>
 
     <v-main>
-      <HelloWorld />
+      <!-- Provides the application the proper gutter -->
+      <v-container fluid>
+        <router-view></router-view>
+      </v-container>
     </v-main>
   </v-app>
 </template>
-
-<script>
-import HelloWorld from "./components/HelloWorld";
-
-export default {
-  name: "App",
-
-  components: {
-    HelloWorld,
-  },
-
-  data: () => ({
-    //
-  }),
-};
-</script>
