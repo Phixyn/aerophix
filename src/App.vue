@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <!-- TODO put in a AppHeader component -->
     <v-app-bar app dense hide-on-scroll color="primary" dark>
       <div class="d-flex align-center">
         <v-img
