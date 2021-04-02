@@ -1,5 +1,5 @@
 <template>
-  <div id="map" class="base-map"></div>
+  <v-row id="map" class="fill-height"></v-row>
 </template>
 
 <script>
@@ -27,11 +27,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-#map {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-}
-</style>

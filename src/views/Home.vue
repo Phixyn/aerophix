@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <BaseMap />
-  </div>
+  <BaseMap />
 </template>
 
 <script>
