@@ -6,7 +6,7 @@
     </v-navigation-drawer>
 
     <!-- TODO put in a AppHeader component -->
-    <v-app-bar app dense hide-on-scroll color="primary" dark>
+    <v-app-bar app dense color="primary" dark>
       <v-app-bar-nav-icon @click="showDrawer = !showDrawer"></v-app-bar-nav-icon>
 
       <div class="d-flex align-center">
