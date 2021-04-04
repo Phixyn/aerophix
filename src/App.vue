@@ -1,13 +1,7 @@
 <template>
   <v-app>
-    <!-- TODO component -->
-    <v-navigation-drawer v-model="showDrawer" app>
-      <!--  -->
-    </v-navigation-drawer>
-
     <!-- TODO put in a AppHeader component -->
     <v-app-bar app dense color="primary" dark>
-      <v-app-bar-nav-icon @click="showDrawer = !showDrawer"></v-app-bar-nav-icon>
 
       <div class="d-flex align-center">
         <v-img
