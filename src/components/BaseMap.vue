@@ -27,11 +27,17 @@ export default {
       zoom: 3,
     });
 
+    // Airport map icon tooltip
+    const popup = new mapboxgl.Popup({
+      closeButton: false,
+    });
+
     map.on("load", () => {
       map.addSource("airports", {
         "type": "vector",
         "url": "mapbox://mapbox.04w69w5j",
       });
+
       map.addLayer({
         "id": "airport",
         "source": "airports",
@@ -42,6 +48,23 @@ export default {
           "icon-padding": 0,
           "icon-allow-overlap": true,
         },
+      });
+
+      map.on("mousemove", "airport", (evt) => {
+        // Change the cursor style as a UI indicator
+        map.getCanvas().style.cursor = "pointer";
+
+        // Populate the popup and set its coordinates based on the feature
+        let feature = evt.features[0];
+        popup
+          .setLngLat(feature.geometry.coordinates)
+          .setText(feature.properties.name + " (" + feature.properties.abbrev + ")")
+          .addTo(map);
+      });
+
+      map.on("mouseleave", "airport", () => {
+        map.getCanvas().style.cursor = "";
+        popup.remove();
       });
     });
   },
