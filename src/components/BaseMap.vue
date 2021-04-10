@@ -19,7 +19,7 @@
         No results found.
       </p>
 
-      <!-- <div id="feature-listing" class="listing"> -->
+      <!-- TODO Maybe optimize this so we don't need two almost identical v-for -->
       <div v-else-if="!isSearching" id="feature-listing" class="listing">
         <a
           v-bind:key="airport.properties['iata_code']"
@@ -175,15 +175,8 @@ export default {
         const airports = this.map.queryRenderedFeatures({ layers: ["airport"] });
 
         if (airports) {
-          const uniqueAirports = this.getUniqueFeatures(airports, "iata_code");
-          // Populate features for the listing overlay
-          //renderListings(uniqueFeatures);
-
-          // Clear the text input field
-          // this.airportsFilter = "";
-
           // Store the current features for later use for filtering
-          this.renderedAirports = uniqueAirports;
+          this.renderedAirports = this.getUniqueFeatures(airports, "iata_code");
         }
       });
 
