@@ -11,7 +11,7 @@
         />
       </fieldset>
 
-      <p v-if="!isSearching && !showAirportList">
+      <p v-if="!isSearching && !hasAirports">
         Drag the map to populate results.
       </p>
 
@@ -56,7 +56,7 @@ export default {
     };
   },
   computed: {
-    showAirportList: function () {
+    hasAirports: function () {
       return this.renderedAirports.length > 0;
     },
     // TODO rename this when we move listings to separate component?
