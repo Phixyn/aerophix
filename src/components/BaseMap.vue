@@ -12,11 +12,15 @@
       </fieldset>
 
       <p v-if="!isSearching && !showAirportList">
-        Drag the map to populate results
+        Drag the map to populate results.
+      </p>
+
+      <p v-if="isSearching && filteredAirports.length === 0">
+        No results found.
       </p>
 
       <!-- <div id="feature-listing" class="listing"> -->
-      <div v-if="!isSearching" id="feature-listing" class="listing">
+      <div v-else-if="!isSearching" id="feature-listing" class="listing">
         <a
           v-bind:key="airport.properties['iata_code']"
           v-for="airport in renderedAirports"
@@ -24,10 +28,6 @@
           {{ airport.properties.name }} ({{ airport.properties.abbrev }})
         </a>
       </div> <!-- #feature-listing -->
-
-      <p v-else-if="isSearching && filteredAirports.length === 0">
-        No results found
-      </p>
 
       <div v-else id="feature-listing" class="listing">
         <a
@@ -84,13 +84,12 @@ export default {
      * text input.
      */
     airportsFilter: function (newValue) {
-      if (newValue === "") {
+      if (newValue !== "" && this.filteredAirports.length === 0) {
+        // TODO show no airports?
+        return false;
+      } else if (newValue === "") {
         this.map.setFilter("airport", ["has", "abbrev"]);
-      }
-      // else if (this.filteredAirports.length === 0) {
-      //  TODO show no airports?
-      // }
-      else if (this.filteredAirports.length > 0) {
+      } else if (this.filteredAirports.length > 0) {
         this.map.setFilter("airport", [
           "match",
           ["get", "abbrev"],
