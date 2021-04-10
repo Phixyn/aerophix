@@ -4,15 +4,40 @@
     <div class="map-overlay">
       <fieldset>
         <input
+          v-model="airportsFilter"
           id="feature-filter"
           type="text"
-          placeholder="Filter results by name"
+          placeholder="Filter airports by name"
         />
       </fieldset>
-      <div id="feature-listing" class="listing">
-        <a v-bind:key="feature.properties['iata_code']" v-for="feature in airports">{{feature.properties.name}} ({{feature.properties.abbrev}})</a>
-      </div>
-    </div>
+
+      <p v-if="!isSearching && !hasAirports">
+        Drag the map to populate results.
+      </p>
+
+      <p v-if="isSearching && filteredAirports.length === 0">
+        No results found.
+      </p>
+
+      <!-- TODO Maybe optimize this so we don't need two almost identical v-for -->
+      <div v-else-if="!isSearching" id="feature-listing" class="listing">
+        <a
+          v-bind:key="airport.properties['iata_code']"
+          v-for="airport in renderedAirports"
+        >
+          {{ airport.properties.name }} ({{ airport.properties.abbrev }})
+        </a>
+      </div> <!-- #feature-listing -->
+
+      <div v-else id="feature-listing" class="listing">
+        <a
+          v-bind:key="airport.properties['iata_code']"
+          v-for="airport in filteredAirports"
+        >
+          {{ airport.properties.name }} ({{ airport.properties.abbrev }})
+        </a>
+      </div> <!-- #feature-listing -->
+    </div> <!-- .map-overlay -->
   </v-row>
 </template>
 
@@ -25,10 +50,67 @@ export default {
   data() {
     return {
       accessToken: process.env.VUE_APP_MAPBOX_ACCESS_TOKEN,
-      airports: []
+      map: null,
+      renderedAirports: [], // Airports currently visible on the map
+      airportsFilter: "",
     };
   },
+  computed: {
+    hasAirports: function () {
+      return this.renderedAirports.length > 0;
+    },
+    // TODO rename this when we move listings to separate component?
+    // User has entered text into the input field
+    isSearching: function () {
+      return this.airportsFilter !== "";
+    },
+    // Airports that match the text entered in the text input
+    filteredAirports: function () {
+      if (this.airportsFilter === "") {
+        return [];
+      }
+
+      const filterBy = this.normalize(this.airportsFilter);
+      return this.renderedAirports.filter((airport) => {
+        const name = this.normalize(airport.properties.name);
+        const code = this.normalize(airport.properties.abbrev);
+        return name.indexOf(filterBy) > -1 || code.indexOf(filterBy) > -1;
+      });
+    },
+  },
+  watch: {
+    /**
+     * Filter airports shown on the map based on the text entered on the
+     * text input.
+     */
+    airportsFilter: function (newValue) {
+      if (newValue !== "" && this.filteredAirports.length === 0) {
+        // TODO show no airports?
+        return false;
+      } else if (newValue === "") {
+        this.map.setFilter("airport", ["has", "abbrev"]);
+      } else if (this.filteredAirports.length > 0) {
+        this.map.setFilter("airport", [
+          "match",
+          ["get", "abbrev"],
+          this.filteredAirports.map((feature) => {
+            return feature.properties.abbrev;
+          }),
+          true,
+          false,
+        ]);
+      }
+    },
+  },
   methods: {
+    /**
+     * Normalizes a string by trimming whitespace and coverting it to lowercase.
+     *
+     * @param {string} string The string to normalize.
+     */
+    normalize(string) {
+      return string.trim().toLowerCase();
+    },
     /**
      * TODO
      *
@@ -52,16 +134,16 @@ export default {
       });
 
       return uniqueFeatures;
-    }
+    },
   },
   mounted() {
     mapboxgl.accessToken = this.accessToken;
 
-    const map = new mapboxgl.Map({
+    this.map = new mapboxgl.Map({
       container: "map",
       style: "mapbox://styles/mapbox/streets-v11",
       center: [-98, 38.88],
-      maxZoom: 5,
+      maxZoom: 10,
       minZoom: 1,
       zoom: 3,
     });
@@ -71,13 +153,13 @@ export default {
       closeButton: false,
     });
 
-    map.on("load", () => {
-      map.addSource("airports", {
+    this.map.on("load", () => {
+      this.map.addSource("airports", {
         "type": "vector",
         "url": "mapbox://mapbox.04w69w5j",
       });
 
-      map.addLayer({
+      this.map.addLayer({
         "id": "airport",
         "source": "airports",
         "source-layer": "ne_10m_airports",
@@ -89,37 +171,29 @@ export default {
         },
       });
 
-      map.on("moveend", () => {
-        const features = map.queryRenderedFeatures({ layers: ["airport"] });
+      this.map.on("moveend", () => {
+        const airports = this.map.queryRenderedFeatures({ layers: ["airport"] });
 
-        if (features) {
-          const uniqueFeatures = this.getUniqueFeatures(features, "iata_code");
-          // Populate features for the listing overlay
-          //renderListings(uniqueFeatures);
-
-          // Clear the input container
-          //filterEl.value = "";
-
-          // Store the current features in sn `airports` variable to
-          // later use for filtering on `keyup`.
-          this.airports = uniqueFeatures;
+        if (airports) {
+          // Store the current features for later use for filtering
+          this.renderedAirports = this.getUniqueFeatures(airports, "iata_code");
         }
       });
 
-      map.on("mousemove", "airport", (evt) => {
+      this.map.on("mousemove", "airport", (evt) => {
         // Change the cursor style as a UI indicator
-        map.getCanvas().style.cursor = "pointer";
+        this.map.getCanvas().style.cursor = "pointer";
 
         // Populate the popup and set its coordinates based on the feature
         const feature = evt.features[0];
         popup
           .setLngLat(feature.geometry.coordinates)
           .setText(feature.properties.name + " (" + feature.properties.abbrev + ")")
-          .addTo(map);
+          .addTo(this.map);
       });
 
-      map.on("mouseleave", "airport", () => {
-        map.getCanvas().style.cursor = "";
+      this.map.on("mouseleave", "airport", () => {
+        this.map.getCanvas().style.cursor = "";
         popup.remove();
       });
     });
@@ -149,7 +223,6 @@ export default {
 }
 
 .map-overlay fieldset {
-  display: none;
   background: #ddd;
   border: none;
   padding: 10px;
