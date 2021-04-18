@@ -26,6 +26,7 @@
           v-bind:href="airport.properties.wikipedia"
           v-bind:key="airport.properties['iata_code']"
           v-for="airport in renderedAirports"
+          v-on:mouseover="highlightMapAirport(airport)"
         >
           {{ airport.properties.name }} ({{ airport.properties.abbrev }})
         </a>
@@ -37,6 +38,7 @@
           v-bind:href="airport.properties.wikipedia"
           v-bind:key="airport.properties['iata_code']"
           v-for="airport in filteredAirports"
+          v-on:mouseover="highlightMapAirport(airport)"
         >
           {{ airport.properties.name }} ({{ airport.properties.abbrev }})
         </a>
@@ -55,7 +57,10 @@ export default {
     return {
       accessToken: process.env.VUE_APP_MAPBOX_ACCESS_TOKEN,
       map: null,
-      renderedAirports: [], // Airports currently visible on the map
+      // Airport map icon tooltip
+      popup: null,
+      // Airports currently visible on the map
+      renderedAirports: [],
       airportsFilter: "",
     };
   },
@@ -116,6 +121,17 @@ export default {
       return string.trim().toLowerCase();
     },
     /**
+     * Highlight given airport feature on the map with a popup.
+     */
+    highlightMapAirport(airport) {
+      this.popup
+        .setLngLat(airport.geometry.coordinates)
+        .setText(
+          airport.properties.name + " (" + airport.properties.abbrev + ")"
+        )
+        .addTo(this.map);
+    },
+    /**
      * TODO
      *
      * Returns unique features in a given array of features.
@@ -152,8 +168,7 @@ export default {
       zoom: 3,
     });
 
-    // Airport map icon tooltip
-    const popup = new mapboxgl.Popup({
+    this.popup = new mapboxgl.Popup({
       closeButton: false,
     });
 
@@ -190,7 +205,7 @@ export default {
 
         // Populate the popup and set its coordinates based on the feature
         const feature = evt.features[0];
-        popup
+        this.popup
           .setLngLat(feature.geometry.coordinates)
           .setText(feature.properties.name + " (" + feature.properties.abbrev + ")")
           .addTo(this.map);
@@ -198,7 +213,7 @@ export default {
 
       this.map.on("mouseleave", "airport", () => {
         this.map.getCanvas().style.cursor = "";
-        popup.remove();
+        this.popup.remove();
       });
     });
   },
