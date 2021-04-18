@@ -22,6 +22,8 @@
       <!-- TODO Maybe optimize this so we don't need two almost identical v-for -->
       <div v-else-if="!isSearching" id="feature-listing" class="listing">
         <a
+          target="_blank"
+          v-bind:href="airport.properties.wikipedia"
           v-bind:key="airport.properties['iata_code']"
           v-for="airport in renderedAirports"
         >
@@ -31,6 +33,8 @@
 
       <div v-else id="feature-listing" class="listing">
         <a
+          target="_blank"
+          v-bind:href="airport.properties.wikipedia"
           v-bind:key="airport.properties['iata_code']"
           v-for="airport in filteredAirports"
         >
