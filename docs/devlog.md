@@ -1,7 +1,7 @@
 # AeroPhix Development Log
 
 ```
-Version: 0.1.0
+Version: 0.2.0
 Description: General aviation flight planner.
 Project start: 27 November 2020
 GitHub: https://github.com/Phixyn/aerophix
@@ -20,6 +20,8 @@ Devlog template: 1.1.0
     - [Guides](#guides)
     - [Vue Router](#vue-router)
     - [Vuetify](#vuetify)
+    - [Testing](#testing)
+    - [Mapbox](#mapbox)
     - [APIs](#apis)
     - [Packages](#packages)
     - [Tools](#tools)
@@ -58,6 +60,21 @@ Devlog template: 1.1.0
 ### Vuetify
 
 - [Components — Vuetify](https://vuetifyjs.com/en/components/buttons/#sizing)
+- https://vuetifyjs.com/en/components/grids/#no-gutters
+- https://vuejs.org/v2/guide/computed.html#Watchers
+
+### Testing
+
+- https://www.freecodecamp.org/news/how-to-unit-test-your-first-vue-js-component-14db6e1e360d/
+- https://vuejs.org/v2/cookbook/unit-testing-vue-components.html
+- https://vuejs.org/v2/guide/testing.html
+
+### Mapbox
+
+- https://dev.to/hmintoh/how-to-mapbox-with-vue-js-2a34
+- https://medium.com/swlh/use-mapbox-popups-with-vue-3-7b454387d0d2
+- https://soal.github.io/vue-mapbox/guide/
+- https://github.com/soal/vue-mapbox/tree/development/src
 
 ### APIs
 
