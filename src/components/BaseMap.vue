@@ -1,6 +1,7 @@
 <template>
   <v-row class="fill-height no-gutters">
     <v-col id="map"></v-col>
+    <!-- TODO move to a new component? -->
     <div class="map-overlay">
       <fieldset>
         <input
@@ -20,29 +21,49 @@
       </p>
 
       <!-- TODO Maybe optimize this so we don't need two almost identical v-for -->
-      <div v-else-if="!isSearching" id="feature-listing" class="listing">
-        <a
+      <!-- <div v-else-if="!isSearching" id="feature-listing" class="listing"> -->
+      <v-expansion-panels
+        v-else-if="!isSearching"
+        id="feature-listing"
+        class="listing"
+      >
+        <!-- <a
           target="_blank"
           v-bind:href="airport.properties.wikipedia"
           v-bind:key="airport.properties['iata_code']"
           v-for="airport in renderedAirports"
           v-on:mouseover="highlightMapAirport(airport)"
+        > -->
+        <!-- TODO: mouseover doesn't work, need to find another way to highlight airport -->
+        <v-expansion-panel
+          v-bind:key="airport.properties['iata_code']"
+          v-for="airport in renderedAirports"
+          v-on:mouseover="highlightMapAirport(airport)"
         >
-          {{ airport.properties.name }} ({{ airport.properties.abbrev }})
-        </a>
-      </div> <!-- #feature-listing -->
+          <v-expansion-panel-header>
+            {{ airport.properties.name }} ({{airport.properties.abbrev}})
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            Placeholder (do API call)
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels> <!-- #feature-listing -->
 
-      <div v-else id="feature-listing" class="listing">
-        <a
-          target="_blank"
-          v-bind:href="airport.properties.wikipedia"
+      <!-- <div v-else id="feature-listing" class="listing"> -->
+      <v-expansion-panels v-else id="feature-listing" class="listing">
+        <v-expansion-panel
           v-bind:key="airport.properties['iata_code']"
           v-for="airport in filteredAirports"
           v-on:mouseover="highlightMapAirport(airport)"
         >
-          {{ airport.properties.name }} ({{ airport.properties.abbrev }})
-        </a>
-      </div> <!-- #feature-listing -->
+          <v-expansion-panel-header>
+            {{ airport.properties.name }} ({{airport.properties.abbrev}})
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            Placeholder (do API call)
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels> <!-- #feature-listing -->
     </div> <!-- .map-overlay -->
   </v-row>
 </template>
@@ -191,7 +212,9 @@ export default {
       });
 
       this.map.on("moveend", () => {
-        const airports = this.map.queryRenderedFeatures({ layers: ["airport"] });
+        const airports = this.map.queryRenderedFeatures({
+          layers: ["airport"],
+        });
 
         if (airports) {
           // Store the current features for later use for filtering
@@ -207,7 +230,9 @@ export default {
         const feature = evt.features[0];
         this.popup
           .setLngLat(feature.geometry.coordinates)
-          .setText(feature.properties.name + " (" + feature.properties.abbrev + ")")
+          .setText(
+            feature.properties.name + " (" + feature.properties.abbrev + ")"
+          )
           .addTo(this.map);
       });
 
