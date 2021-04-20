@@ -44,7 +44,12 @@
             {{ airport.properties.name }} ({{airport.properties.abbrev}})
           </v-expansion-panel-header>
           <v-expansion-panel-content>
-            Placeholder (do API call)
+            <v-img
+              class="white--text align-end"
+              height="200px"
+              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+            ></v-img>
+            <a v-bind:href="airport.properties.wikipedia" target="_blank">Wikipedia</a>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels> <!-- #feature-listing -->
@@ -60,7 +65,12 @@
             {{ airport.properties.name }} ({{airport.properties.abbrev}})
           </v-expansion-panel-header>
           <v-expansion-panel-content>
-            Placeholder (do API call)
+            <v-img
+              class="white--text align-end"
+              height="200px"
+              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+            ></v-img>
+            <a v-bind:href="airport.properties.wikipedia" target="_blank">Wikipedia</a>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels> <!-- #feature-listing -->
