@@ -20,39 +20,35 @@
         No results found.
       </p>
 
-      <!-- TODO Maybe optimize this so we don't need two almost identical v-for -->
-      <!-- <div v-else-if="!isSearching" id="feature-listing" class="listing"> -->
-      <v-expansion-panels
-        v-else-if="!isSearching"
-        id="feature-listing"
-        class="listing"
-      >
-        <!-- <a
-          target="_blank"
-          v-bind:href="airport.properties.wikipedia"
-          v-bind:key="airport.properties['iata_code']"
-          v-for="airport in renderedAirports"
-          v-on:mouseover="highlightMapAirport(airport)"
-        > -->
-        <!-- TODO: mouseover doesn't work, need to find another way to highlight airport -->
-        <v-expansion-panel
-          v-bind:key="airport.properties['iata_code']"
-          v-for="airport in renderedAirports"
-          v-on:mouseover="highlightMapAirport(airport)"
-        >
-          <v-expansion-panel-header>
-            {{ airport.properties.name }} ({{airport.properties.abbrev}})
-          </v-expansion-panel-header>
-          <v-expansion-panel-content>
-            <v-img
-              class="white--text align-end"
-              height="200px"
-              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-            ></v-img>
-            <a v-bind:href="airport.properties.wikipedia" target="_blank">Wikipedia</a>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-      </v-expansion-panels> <!-- #feature-listing -->
+      <v-sheet v-else-if="!isSearching">
+        <v-list>
+          <v-list-item
+            v-for="airport in renderedAirports"
+            :key="airport.properties['iata_code']"
+          >
+            <v-list-item-content>
+              <!-- <v-img
+                class="white--text align-end"
+                height="200px"
+                src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+              ></v-img> -->
+              <!-- <v-divider></v-divider> -->
+
+              <v-list-item-title
+                v-text="airport.properties['iata_code']"
+              ></v-list-item-title>
+              <v-list-item-subtitle
+                v-text="airport.properties['gps_code']"
+              ></v-list-item-subtitle>
+              <a v-bind:href="airport.properties.wikipedia" target="_blank"
+                >Wikipedia</a
+              >
+              <v-divider></v-divider>
+            </v-list-item-content>
+          </v-list-item>
+
+        </v-list>
+      </v-sheet>
 
       <!-- <div v-else id="feature-listing" class="listing"> -->
       <v-expansion-panels v-else id="feature-listing" class="listing">
