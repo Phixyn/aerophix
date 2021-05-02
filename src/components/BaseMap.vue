@@ -1,15 +1,13 @@
 <template>
   <v-row class="fill-height no-gutters">
-    <v-col id="map"></v-col>
     <!-- TODO move to a new component? -->
-    <!-- TODO use another v-col instead of a div -->
-    <div class="map-overlay">
+    <v-col id="map-overlay" md="3">
       <fieldset>
         <input
-          v-model="airportsFilter"
           id="feature-filter"
           type="text"
           placeholder="Filter airports by name"
+          v-model="airportsFilter"
         />
       </fieldset>
 
@@ -27,7 +25,9 @@
       ></AirportList>
 
       <AirportList v-else :airports="filteredAirports"></AirportList>
-    </div> <!-- .map-overlay -->
+    </v-col> <!-- .map-overlay -->
+
+    <v-col id="map" md="9"></v-col>
   </v-row>
 </template>
 
@@ -215,34 +215,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#map {
-  position: absolute;
-  left: 25%;
-  top: 0;
-  bottom: 0;
-  width: 75%;
-}
-
-.map-overlay {
-  position: absolute;
-  width: 25%;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
-  background-color: #fff;
+#map-overlay {
+  font-size: 0.8rem;
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+  background-color: #ffffff;
   max-height: 100%;
   overflow: hidden;
+  // height: 100%;
+  // overflow: auto;
 }
 
-.map-overlay fieldset {
-  background: #ddd;
+#map-overlay fieldset {
+  background: #dddddd;
   border: none;
   padding: 10px;
   margin: 0;
 }
 
-.map-overlay input {
+#map-overlay input {
   display: block;
   border: none;
   width: 100%;
