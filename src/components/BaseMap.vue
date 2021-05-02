@@ -2,6 +2,7 @@
   <v-row class="fill-height no-gutters">
     <v-col id="map"></v-col>
     <!-- TODO move to a new component? -->
+    <!-- TODO use another v-col instead of a div -->
     <div class="map-overlay">
       <fieldset>
         <input
@@ -20,8 +21,12 @@
         No results found.
       </p>
 
-      <!-- <div v-else id="feature-listing" class="listing"> -->
-      <AirportList :airports="renderedAirports"></AirportList>
+      <AirportList
+        v-else-if="!isSearching"
+        :airports="renderedAirports"
+      ></AirportList>
+
+      <AirportList v-else :airports="filteredAirports"></AirportList>
     </div> <!-- .map-overlay -->
   </v-row>
 </template>
@@ -245,30 +250,5 @@ export default {
   padding: 10px;
   margin: 0;
   box-sizing: border-box;
-}
-
-.map-overlay .listing {
-  overflow: auto;
-  max-height: 100%;
-}
-
-.map-overlay .listing > * {
-  display: block;
-  padding: 5px 10px;
-  margin: 0;
-}
-
-.map-overlay .listing a {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  color: #404;
-  text-decoration: none;
-}
-
-.map-overlay .listing a:last-child {
-  border: none;
-}
-
-.map-overlay .listing a:hover {
-  background: #f0f0f0;
 }
 </style>
