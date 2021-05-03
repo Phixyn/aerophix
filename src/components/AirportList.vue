@@ -1,14 +1,17 @@
 <template>
-  <v-sheet id="feature-listing">
-    <v-list>
+  <v-list id="feature-listing" two-line>
+    <v-list-item-group
+      active-class="pink--text"
+    >
       <AirportListItem
         v-for="airport in airports"
         :key="airport.properties['gps_code']"
         :airport="airport"
       >
       </AirportListItem>
-    </v-list>
-  </v-sheet>
+    </v-list-item-group>
+  </v-list>
+  <!-- </v-sheet> -->
 </template>
 
 <script>
@@ -21,12 +24,14 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 #feature-listing {
+  // TODO improve
+  height: 93%;
   overflow: auto;
-  max-height: 100%;
 }
 
+/* TODO move to AirportListItem component */
 #feature-listing > * {
   display: block;
   padding: 5px 10px;
