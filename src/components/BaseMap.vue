@@ -1,34 +1,46 @@
 <template>
   <v-sheet>
     <!-- TODO move to a new component? -->
-    <div id="map-overlay">
-      <fieldset>
-        <input
-          id="feature-filter"
-          type="text"
-          placeholder="Filter airports by name"
+    <v-sheet id="map-overlay">
+      <v-form
+        id="feature-filter"
+        ref="search-form"
+        class="grey lighten-2 px-4 my-auto mx-0"
+      >
+        <v-text-field
+          id="search-input"
           v-model="airportsFilter"
-        />
-      </fieldset>
+          label="Filter airports by name"
+        ></v-text-field>
+      </v-form> <!-- #feature-filter -->
 
-      <p v-if="!isSearching && !hasAirports">
-        Drag the map to populate results.
-      </p>
+      <v-alert
+        v-if="!isSearching && !hasAirports"
+        dense
+        text
+        type="info"
+        class="rounded-0"
+      >
+        Drag or zoom the map to populate results.
+      </v-alert>
 
-      <p v-if="isSearching && filteredAirports.length === 0">
+      <v-alert
+        v-if="isSearching && filteredAirports.length === 0"
+        dense
+        text
+        type="warning"
+        class="rounded-0"
+      >
         No results found.
-      </p>
+      </v-alert>
 
-      <AirportList
-        v-else-if="!isSearching"
-        :airports="renderedAirports"
-      ></AirportList>
+      <AirportList v-else-if="!isSearching" :airports="renderedAirports" />
 
-      <AirportList v-else :airports="filteredAirports"></AirportList>
-    </div> <!-- #map-overlay -->
+      <AirportList v-else :airports="filteredAirports" />
+    </v-sheet> <!-- #map-overlay -->
 
     <div id="map"></div>
-  </v-sheet> <!-- </v-row> -->
+  </v-sheet>
 </template>
 
 <script>
@@ -217,40 +229,25 @@ export default {
 <style lang="scss" scoped>
 #map {
   position: absolute;
-  left: 25%;
   top: 0;
+  left: 25%;
   bottom: 0;
   width: 75%;
 }
 
 #map-overlay {
   position: absolute;
-  width: 25%;
   top: 0;
-  bottom: 0;
   left: 0;
-  font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
-  background-color: #ffffff;
+  bottom: 0;
+  width: 25%;
   max-height: 100%;
   overflow: hidden;
+  font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
-#map-overlay fieldset {
+#feature-filter {
   // TODO Improve
-  height: 7%;
-  background: #dddddd;
-  border: none;
-  padding: 0.625rem;
-  margin: 0;
-}
-
-#map-overlay input {
-  display: block;
-  border: none;
-  width: 100%;
-  border-radius: 3px;
-  padding: 0.625rem;
-  margin: 0;
-  box-sizing: border-box;
+  min-height: 10%;
 }
 </style>
