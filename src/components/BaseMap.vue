@@ -1,7 +1,7 @@
 <template>
-  <v-row class="fill-height no-gutters">
+  <v-sheet>
     <!-- TODO move to a new component? -->
-    <v-col id="map-overlay" md="3">
+    <div id="map-overlay">
       <fieldset>
         <input
           id="feature-filter"
@@ -25,10 +25,10 @@
       ></AirportList>
 
       <AirportList v-else :airports="filteredAirports"></AirportList>
-    </v-col> <!-- .map-overlay -->
+    </div> <!-- #map-overlay -->
 
-    <v-col id="map" md="9"></v-col>
-  </v-row>
+    <div id="map"></div>
+  </v-sheet> <!-- </v-row> -->
 </template>
 
 <script>
@@ -215,20 +215,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#map {
+  position: absolute;
+  left: 25%;
+  top: 0;
+  bottom: 0;
+  width: 75%;
+}
+
 #map-overlay {
-  font-size: 0.8rem;
-  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+  position: absolute;
+  width: 25%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
   background-color: #ffffff;
   max-height: 100%;
   overflow: hidden;
-  // height: 100%;
-  // overflow: auto;
 }
 
 #map-overlay fieldset {
+  // TODO Improve
+  height: 7%;
   background: #dddddd;
   border: none;
-  padding: 10px;
+  padding: 0.625rem;
   margin: 0;
 }
 
@@ -237,7 +249,7 @@ export default {
   border: none;
   width: 100%;
   border-radius: 3px;
-  padding: 10px;
+  padding: 0.625rem;
   margin: 0;
   box-sizing: border-box;
 }
