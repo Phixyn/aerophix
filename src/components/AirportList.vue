@@ -1,5 +1,5 @@
 <template>
-  <v-list id="feature-listing" two-line>
+  <v-list id="feature-listing" class="pa-0" two-line>
     <v-list-item-group
       active-class="pink--text"
     >
@@ -27,8 +27,9 @@ export default {
 <style lang="scss">
 #feature-listing {
   // TODO improve
-  height: 93%;
+  height: 90%;
   overflow: auto;
+  scrollbar-width: thin;
 }
 
 /* TODO move to AirportListItem component */
