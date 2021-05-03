@@ -29,8 +29,18 @@ export default {
   props: ["airport"],
   data() {
     return {
-      testSubtitle: `<p> ${this.airport.properties["gps_code"]} | <a href="${this.airport.properties.wikipedia}" target="_blank">Wikipedia</a>`,
+      testSubtitle: `${this.airport.properties["gps_code"]} | <a href="${this.airport.properties.wikipedia}" target="_blank">Wikipedia</a>`,
     };
   },
 };
 </script>
+
+<style lang="scss">
+.list-item a {
+  text-decoration: none;
+}
+
+.list-item a:hover {
+  background: #f0f0f0;
+}
+</style>

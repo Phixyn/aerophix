@@ -1,5 +1,5 @@
 <template>
-  <v-list id="feature-listing" class="pa-0" two-line>
+  <v-list id="airport-list" class="pa-0" two-line>
     <v-list-item-group
       active-class="pink--text"
     >
@@ -10,8 +10,7 @@
       >
       </AirportListItem>
     </v-list-item-group>
-  </v-list>
-  <!-- </v-sheet> -->
+  </v-list> <!-- #airport-list -->
 </template>
 
 <script>
@@ -25,30 +24,10 @@ export default {
 </script>
 
 <style lang="scss">
-#feature-listing {
+#airport-list {
   // TODO improve
   height: 90%;
   overflow: auto;
   scrollbar-width: thin;
-}
-
-/* TODO move to AirportListItem component */
-#feature-listing > * {
-  display: block;
-  margin: 0;
-}
-
-#feature-listing a {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  color: #404;
-  text-decoration: none;
-}
-
-#feature-listing a:last-child {
-  border: none;
-}
-
-#feature-listing a:hover {
-  background: #f0f0f0;
 }
 </style>
