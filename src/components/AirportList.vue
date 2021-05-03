@@ -34,7 +34,6 @@ export default {
 /* TODO move to AirportListItem component */
 #feature-listing > * {
   display: block;
-  padding: 5px 10px;
   margin: 0;
 }
 
