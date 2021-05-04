@@ -3,16 +3,20 @@
     <!-- TODO move to a new component? -->
     <v-sheet id="map-overlay">
       <v-form
-        id="feature-filter"
+        id="airport-search-form"
         ref="search-form"
         class="grey lighten-2 px-4 my-auto mx-0"
       >
+        <!-- TODO: Add clearable prop and handle clear event
+            "click:clear" in the docs
+        -->
         <v-text-field
           id="search-input"
           v-model="airportsFilter"
-          label="Filter airports by name"
+          label="Search"
+          placeholder="Filter airports by name"
         ></v-text-field>
-      </v-form> <!-- #feature-filter -->
+      </v-form> <!-- #airport-search-form -->
 
       <v-alert
         v-if="!isSearching && !hasAirports"
@@ -246,7 +250,7 @@ export default {
   font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
-#feature-filter {
+#airport-search-form {
   // TODO Improve
   min-height: 10%;
 }
