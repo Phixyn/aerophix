@@ -2,13 +2,17 @@
   <v-sheet>
     <v-sheet id="map-overlay">
       <AirportListSheet
+        v-if="!hasAirportSelected"
         :airportsFilter="airportsFilter"
         :isSearching="isSearching"
         :hasAirports="hasAirports"
         :renderedAirports="renderedAirports"
         :filteredAirports="filteredAirports"
         v-on:input-change="setFilter"
+        v-on:airport-selected="selectAirport"
       />
+
+      <AirportInfoCard v-else />
     </v-sheet> <!-- #map-overlay -->
 
     <div id="map"></div>
@@ -17,6 +21,7 @@
 
 <script>
 import AirportListSheet from "./AirportListSheet.vue";
+import AirportInfoCard from "./AirportInfoCard.vue";
 
 import axios from "axios";
 import mapboxgl from "mapbox-gl";
@@ -26,6 +31,7 @@ export default {
   name: "BaseMap",
   components: {
     AirportListSheet,
+    AirportInfoCard,
   },
   data() {
     return {
@@ -36,6 +42,7 @@ export default {
       // Airports currently visible on the map
       renderedAirports: [],
       airportsFilter: "",
+      selectedAirport: {},
     };
   },
   computed: {
@@ -61,6 +68,11 @@ export default {
         const code = this.normalize(airport.properties.abbrev);
         return name.indexOf(filterBy) > -1 || code.indexOf(filterBy) > -1;
       });
+    },
+    hasAirportSelected: function () {
+      return (
+        this.selectedAirport && Object.keys(this.selectedAirport).length !== 0
+      );
     },
   },
   watch: {
@@ -88,8 +100,17 @@ export default {
     },
   },
   methods: {
+    /**
+     * TODO
+     */
     setFilter(filter) {
       this.airportsFilter = filter;
+    },
+    /**
+     * TODO
+     */
+    selectAirport(airport) {
+      this.selectedAirport = airport;
     },
     /**
      * Normalizes a string by trimming whitespace and coverting it to lowercase.
