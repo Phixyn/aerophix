@@ -18,7 +18,7 @@
     </v-form> <!-- #airport-search-form -->
 
     <v-alert
-      v-if="!isSearching && !hasAirports"
+      v-if="!isSearching && !mapHasAirports"
       dense
       text
       type="info"
@@ -28,7 +28,7 @@
     </v-alert>
 
     <v-alert
-      v-if="isSearching && filteredAirports.length === 0"
+      v-if="isSearching && !mapHasFilteredAirports"
       dense
       text
       type="warning"
@@ -44,7 +44,7 @@
     />
 
     <AirportList
-      v-else
+      v-else-if="isSearching && mapHasFilteredAirports"
       :airports="filteredAirports"
       v-on:airport-selected="$emit('airport-selected', $event)"
     />
@@ -70,8 +70,11 @@ export default {
     };
   },
   computed: {
-    hasAirports: function () {
+    mapHasAirports: function () {
       return this.renderedAirports.length > 0;
+    },
+    mapHasFilteredAirports: function() {
+      return this.filteredAirports.length > 0;
     },
   },
 };
