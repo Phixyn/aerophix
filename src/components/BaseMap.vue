@@ -12,7 +12,10 @@
         v-on:airport-selected="selectAirport"
       />
 
-      <AirportInfoCard v-else />
+      <AirportInfoCard
+        v-else
+        v-on:navigate-back="unselectAirport"
+      />
     </v-sheet> <!-- #map-overlay -->
 
     <div id="map"></div>
@@ -111,6 +114,12 @@ export default {
      */
     selectAirport(airport) {
       this.selectedAirport = airport;
+    },
+    /**
+     * TODO
+     */
+    unselectAirport() {
+      this.selectedAirport = {};
     },
     /**
      * Normalizes a string by trimming whitespace and coverting it to lowercase.
