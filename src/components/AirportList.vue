@@ -1,6 +1,7 @@
 <template>
   <v-list id="airport-list" class="pa-0" two-line>
     <v-list-item-group
+      v-model="selected"
       active-class="pink--text"
     >
       <AirportListItem
@@ -20,6 +21,26 @@ export default {
   name: "AirportList",
   components: { AirportListItem },
   props: ["airports"],
+  computed: {
+    selectedAirport: function() {
+      // TODO do the one liner thing Pog
+      if (this.selected === null) {
+        return null;
+      }
+
+      return this.airports[this.selected];
+    }
+  },
+  data() {
+    return {
+      selected: null,
+    };
+  },
+  watch: {
+    selected: function (selectedAirport) {
+      this.$emit('airport-selected', this.airports[selectedAirport]);
+    }
+  }
 };
 </script>
 
