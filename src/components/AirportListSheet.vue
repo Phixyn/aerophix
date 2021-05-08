@@ -38,9 +38,17 @@
       No results found.
     </v-alert>
 
-    <AirportList v-else-if="!isSearching" :airports="renderedAirports" />
+    <AirportList
+      v-else-if="!isSearching"
+      :airports="renderedAirports"
+      v-on:airport-selected="$emit('airport-selected', $event)"
+    />
 
-    <AirportList v-else :airports="filteredAirports" />
+    <AirportList
+      v-else
+      :airports="filteredAirports"
+      v-on:airport-selected="$emit('airport-selected', $event)"
+    />
   </div>
 </template>
 
