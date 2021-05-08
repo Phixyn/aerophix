@@ -6,7 +6,7 @@
         :airportsFilter="airportsFilter"
         :renderedAirports="renderedAirports"
         :filteredAirports="filteredAirports"
-        v-on:input-change="setFilter"
+        v-on:input-change="setAirportFilter"
         v-on:airport-selected="selectAirport"
       />
 
@@ -94,7 +94,7 @@ export default {
     /**
      * TODO
      */
-    setFilter(filter) {
+    setAirportFilter(filter) {
       this.airportsFilter = filter;
     },
     /**
