@@ -1,46 +1,14 @@
 <template>
   <v-sheet>
-    <!-- TODO move to a new component? -->
     <v-sheet id="map-overlay">
-      <v-form
-        id="airport-search-form"
-        ref="search-form"
-        class="grey lighten-2 px-4 my-auto mx-0"
-      >
-        <!-- TODO: Add clearable prop and handle clear event
-            "click:clear" in the docs
-        -->
-        <v-text-field
-          id="search-input"
-          v-model="airportsFilter"
-          label="Search"
-          placeholder="Filter airports by name"
-        ></v-text-field>
-      </v-form> <!-- #airport-search-form -->
-
-      <v-alert
-        v-if="!isSearching && !hasAirports"
-        dense
-        text
-        type="info"
-        class="rounded-0"
-      >
-        Drag or zoom the map to populate results.
-      </v-alert>
-
-      <v-alert
-        v-if="isSearching && filteredAirports.length === 0"
-        dense
-        text
-        type="warning"
-        class="rounded-0"
-      >
-        No results found.
-      </v-alert>
-
-      <AirportList v-else-if="!isSearching" :airports="renderedAirports" />
-
-      <AirportList v-else :airports="filteredAirports" />
+      <AirportListSheet
+        :airportsFilter="airportsFilter"
+        :isSearching="isSearching"
+        :hasAirports="hasAirports"
+        :renderedAirports="renderedAirports"
+        :filteredAirports="filteredAirports"
+        v-on:input-change="setFilter"
+      />
     </v-sheet> <!-- #map-overlay -->
 
     <div id="map"></div>
@@ -48,7 +16,7 @@
 </template>
 
 <script>
-import AirportList from "./AirportList.vue";
+import AirportListSheet from "./AirportListSheet.vue";
 
 import axios from "axios";
 import mapboxgl from "mapbox-gl";
@@ -57,7 +25,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 export default {
   name: "BaseMap",
   components: {
-    AirportList,
+    AirportListSheet,
   },
   data() {
     return {
@@ -72,6 +40,8 @@ export default {
   },
   computed: {
     hasAirports: function () {
+      // TODO probably dont need this, filteredAirports has no
+      // equivalent...
       return this.renderedAirports.length > 0;
     },
     // TODO rename this when we move listings to separate component?
@@ -118,6 +88,9 @@ export default {
     },
   },
   methods: {
+    setFilter(filter) {
+      this.airportsFilter = filter;
+    },
     /**
      * Normalizes a string by trimming whitespace and coverting it to lowercase.
      *
@@ -248,10 +221,5 @@ export default {
   max-height: 100%;
   overflow: hidden;
   font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
-}
-
-#airport-search-form {
-  // TODO Improve
-  min-height: 10%;
 }
 </style>

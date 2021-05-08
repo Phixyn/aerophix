@@ -1,0 +1,75 @@
+<template>
+  <div>
+    <v-form
+      id="airport-search-form"
+      ref="search-form"
+      class="grey lighten-2 px-4 my-auto mx-0"
+    >
+      <!-- TODO: Add clearable prop and handle clear event
+            "click:clear" in the docs
+        -->
+      <v-text-field
+        id="search-input"
+        v-model="airportsFilter"
+        label="Search"
+        placeholder="Filter airports by name"
+        v-on:input="$emit('input-change', $event)"
+      ></v-text-field>
+    </v-form>
+    <!-- #airport-search-form -->
+
+    <v-alert
+      v-if="!isSearching && !hasAirports"
+      dense
+      text
+      type="info"
+      class="rounded-0"
+    >
+      Drag or zoom the map to populate results.
+    </v-alert>
+
+    <v-alert
+      v-if="isSearching && filteredAirports.length === 0"
+      dense
+      text
+      type="warning"
+      class="rounded-0"
+    >
+      No results found.
+    </v-alert>
+
+    <AirportList v-else-if="!isSearching" :airports="renderedAirports" />
+
+    <AirportList v-else :airports="filteredAirports" />
+  </div>
+</template>
+
+<script>
+import AirportList from "./AirportList.vue";
+
+export default {
+  name: "AirportListSheet",
+  components: {
+    AirportList
+  },
+  props: [
+    "isSearching",
+    "hasAirports",
+    "renderedAirports",
+    "filteredAirports",
+  ],
+  data() {
+    return {
+      airportsFilter: "",
+    };
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+#airport-search-form {
+  // TODO This does nothing lule
+  min-height: 10%;
+  height: 50%;
+}
+</style>
