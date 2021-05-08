@@ -7,7 +7,7 @@
     >
       <!-- TODO: Add clearable prop and handle clear event
             "click:clear" in the docs
-        -->
+      -->
       <v-text-field
         id="search-input"
         v-model="airportsFilter"
@@ -15,8 +15,7 @@
         placeholder="Filter airports by name"
         v-on:input="$emit('input-change', $event)"
       ></v-text-field>
-    </v-form>
-    <!-- #airport-search-form -->
+    </v-form> <!-- #airport-search-form -->
 
     <v-alert
       v-if="!isSearching && !hasAirports"
@@ -58,7 +57,7 @@ import AirportList from "./AirportList.vue";
 export default {
   name: "AirportListSheet",
   components: {
-    AirportList
+    AirportList,
   },
   props: [
     "isSearching",

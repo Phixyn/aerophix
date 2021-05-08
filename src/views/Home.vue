@@ -7,9 +7,6 @@ import BaseMap from "@/components/BaseMap.vue";
 
 export default {
   name: "Home",
-
-  components: {
-    BaseMap,
-  },
+  components: { BaseMap },
 };
 </script>
