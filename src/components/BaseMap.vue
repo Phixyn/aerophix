@@ -4,7 +4,6 @@
       <AirportListSheet
         v-if="!hasAirportSelected"
         :airportsFilter="airportsFilter"
-        :isSearching="isSearching"
         :renderedAirports="renderedAirports"
         :filteredAirports="filteredAirports"
         v-on:input-change="setFilter"
@@ -48,11 +47,6 @@ export default {
     };
   },
   computed: {
-    // TODO rename this when we move listings to separate component?
-    // User has entered text into the input field
-    isSearching: function () {
-      return this.airportsFilter !== "";
-    },
     // Airports that match the text entered in the text input
     filteredAirports: function () {
       if (this.airportsFilter === "") {
