@@ -3,7 +3,6 @@
     <v-sheet id="map-overlay">
       <AirportListSheet
         v-if="!hasAirportSelected"
-        :airportsFilter="airportsFilter"
         :renderedAirports="renderedAirports"
         :filteredAirports="filteredAirports"
         v-on:input-change="setAirportFilter"
