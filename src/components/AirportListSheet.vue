@@ -61,7 +61,6 @@ export default {
   },
   props: [
     "isSearching",
-    "hasAirports",
     "renderedAirports",
     "filteredAirports",
   ],
@@ -69,6 +68,11 @@ export default {
     return {
       airportsFilter: "",
     };
+  },
+  computed: {
+    hasAirports: function () {
+      return this.renderedAirports.length > 0;
+    },
   },
 };
 </script>

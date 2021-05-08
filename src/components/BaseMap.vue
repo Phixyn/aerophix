@@ -5,7 +5,6 @@
         v-if="!hasAirportSelected"
         :airportsFilter="airportsFilter"
         :isSearching="isSearching"
-        :hasAirports="hasAirports"
         :renderedAirports="renderedAirports"
         :filteredAirports="filteredAirports"
         v-on:input-change="setFilter"
@@ -49,11 +48,6 @@ export default {
     };
   },
   computed: {
-    hasAirports: function () {
-      // TODO probably dont need this, filteredAirports has no
-      // equivalent...
-      return this.renderedAirports.length > 0;
-    },
     // TODO rename this when we move listings to separate component?
     // User has entered text into the input field
     isSearching: function () {
