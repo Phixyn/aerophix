@@ -11,6 +11,15 @@ export default {
     type: {
       type: String,
       default: "info",
+      validator: function (value) {
+        // The value must match one of these strings
+        return [
+          "success",
+          "info",
+          "warning",
+          "error"
+        ].indexOf(value) !== -1;
+      },
     },
   },
 };
