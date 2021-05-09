@@ -8,7 +8,7 @@
         src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
         transition="scale-transition"
         width="40"
-      />
+      ></v-img>
 
       <v-toolbar-title class="text-h4">AeroPhix</v-toolbar-title>
     </div>
