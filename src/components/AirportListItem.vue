@@ -29,7 +29,11 @@
 <script>
 export default {
   name: "AirportListItem",
-  props: ["airport"],
+
+  props: [
+    "airport"
+  ],
+
   data() {
     return {
       testSubtitle: `${this.airport.properties["gps_code"]} | <a href="${this.airport.properties.wikipedia}" target="_blank">Wikipedia</a>`,

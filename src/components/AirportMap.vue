@@ -28,10 +28,12 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 export default {
   name: "AirportMap",
+
   components: {
     AirportListSheet,
     AirportInfoCard,
   },
+
   data() {
     return {
       accessToken: process.env.VUE_APP_MAPBOX_ACCESS_TOKEN,
@@ -44,6 +46,7 @@ export default {
       selectedAirport: {},
     };
   },
+
   computed: {
     // Airports that match the text entered in the text input
     filteredAirports: function () {
@@ -58,12 +61,14 @@ export default {
         return name.indexOf(filterBy) > -1 || code.indexOf(filterBy) > -1;
       });
     },
+
     hasAirportSelected: function () {
       return (
         this.selectedAirport && Object.keys(this.selectedAirport).length !== 0
       );
     },
   },
+
   watch: {
     /**
      * Filter airports shown on the map based on the text entered on the
@@ -88,6 +93,7 @@ export default {
       }
     },
   },
+
   methods: {
     /**
      * TODO
@@ -95,18 +101,21 @@ export default {
     setAirportFilter(filter) {
       this.airportsFilter = filter;
     },
+
     /**
      * TODO
      */
     selectAirport(airport) {
       this.selectedAirport = airport;
     },
+
     /**
      * TODO
      */
     unselectAirport() {
       this.selectedAirport = {};
     },
+
     /**
      * Normalizes a string by trimming whitespace and coverting it to lowercase.
      *
@@ -115,6 +124,7 @@ export default {
     normalize(string) {
       return string.trim().toLowerCase();
     },
+
     /**
      * Highlight given airport feature on the map with a popup.
      */
@@ -126,6 +136,7 @@ export default {
         )
         .addTo(this.map);
     },
+
     /**
      * TODO
      *
@@ -151,6 +162,7 @@ export default {
       return uniqueFeatures;
     },
   },
+
   mounted() {
     mapboxgl.accessToken = this.accessToken;
 

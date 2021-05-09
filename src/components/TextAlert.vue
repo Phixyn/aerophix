@@ -12,6 +12,7 @@
 <script>
 export default {
   name: "TextAlert",
+
   props: {
     type: {
       type: String,

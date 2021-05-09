@@ -52,11 +52,17 @@ import TextAlert from "./TextAlert.vue";
 
 export default {
   name: "AirportListSheet",
+
   components: {
     AirportList,
     TextAlert,
   },
-  props: ["renderedAirports", "filteredAirports"],
+
+  props: [
+    "renderedAirports",
+    "filteredAirports"
+  ],
+
   data() {
     return {
       airportsFilter: "",
@@ -64,13 +70,16 @@ export default {
       noResultsMsg: "No results found.",
     };
   },
+
   computed: {
     mapHasAirports: function () {
       return this.renderedAirports.length > 0;
     },
+
     mapHasFilteredAirports: function () {
       return this.filteredAirports.length > 0;
     },
+
     /**
      * User has entered text into the input field to filter airports by
      * search term.

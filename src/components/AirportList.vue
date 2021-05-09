@@ -18,8 +18,15 @@ import AirportListItem from "./AirportListItem.vue";
 
 export default {
   name: "AirportList",
-  components: { AirportListItem },
-  props: ["airports"],
+
+  components: {
+    AirportListItem
+  },
+
+  props: [
+    "airports"
+  ],
+
   computed: {
     selectedAirport: function() {
       // TODO do the one liner thing Pog
@@ -30,11 +37,13 @@ export default {
       return this.airports[this.selected];
     }
   },
+
   data() {
     return {
       selected: null,
     };
   },
+
   watch: {
     selected: function (selectedAirport) {
       this.$emit('airport-selected', this.airports[selectedAirport]);
