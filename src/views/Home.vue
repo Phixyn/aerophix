@@ -1,5 +1,5 @@
 <template>
-  <BaseMap />
+  <base-map></base-map>
 </template>
 
 <script>

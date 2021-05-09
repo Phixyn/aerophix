@@ -1,18 +1,18 @@
 <template>
   <v-sheet>
     <v-sheet id="map-overlay">
-      <AirportListSheet
+      <airport-list-sheet
         v-if="!hasAirportSelected"
         :renderedAirports="renderedAirports"
         :filteredAirports="filteredAirports"
         v-on:input-change="setAirportFilter"
         v-on:airport-selected="selectAirport"
-      />
+      ></airport-list-sheet>
 
-      <AirportInfoCard
+      <airport-info-card
         v-else
         v-on:navigate-back="unselectAirport"
-      />
+      ></airport-info-card>
     </v-sheet> <!-- #map-overlay -->
 
     <div id="map"></div>

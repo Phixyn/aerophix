@@ -4,12 +4,11 @@
       v-model="selected"
       active-class="pink--text"
     >
-      <AirportListItem
+      <airport-list-item
         v-for="airport in airports"
         :key="airport.properties['gps_code']"
         :airport="airport"
-      >
-      </AirportListItem>
+      ></airport-list-item>
     </v-list-item-group>
   </v-list> <!-- #airport-list -->
 </template>

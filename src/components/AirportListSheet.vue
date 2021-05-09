@@ -20,29 +20,29 @@
       ></v-text-field>
     </v-form> <!-- #airport-search-form -->
 
-    <TextAlert
+    <text-alert
       v-if="!listIsFiltered && !mapHasAirports"
       :text="initialInfoMsg"
-    />
+    ></text-alert>
 
-    <TextAlert
+    <text-alert
       v-if="listIsFiltered && !mapHasFilteredAirports"
       :text="noResultsMsg"
       type="warning"
-    />
+    ></text-alert>
 
     <!-- TODO could be fancy and potentially use only one AirportList here -->
-    <AirportList
+    <airport-list
       v-else-if="!listIsFiltered && mapHasAirports"
       :airports="renderedAirports"
       v-on:airport-selected="$emit('airport-selected', $event)"
-    />
+    ></airport-list>
 
-    <AirportList
+    <airport-list
       v-else-if="listIsFiltered && mapHasFilteredAirports"
       :airports="filteredAirports"
       v-on:airport-selected="$emit('airport-selected', $event)"
-    />
+    ></airport-list>
   </div>
 </template>
 

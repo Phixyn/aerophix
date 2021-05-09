@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <AppHeader />
+    <app-header></app-header>
 
     <v-main>
       <!-- Provides the application the proper gutter -->
