@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <app-header></app-header>
+    <the-header></the-header>
 
     <v-main>
       <!-- Provides the application the proper gutter -->
@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import AppHeader from "@/components/AppHeader.vue";
+import TheHeader from "@/components/TheHeader.vue";
 
 export default {
   name: "App",
-  components: { AppHeader },
+  components: { TheHeader },
 };
 </script>
