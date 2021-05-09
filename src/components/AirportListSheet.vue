@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!-- TODO move to its own component? Probs need to use slots
+        SheetHeader component (or MapOverlayHeader?)
+    -->
     <v-form
       id="airport-search-form"
       ref="search-form"
@@ -17,26 +20,18 @@
       ></v-text-field>
     </v-form> <!-- #airport-search-form -->
 
-    <v-alert
+    <TextAlert
       v-if="!listIsFiltered && !mapHasAirports"
-      dense
-      text
-      type="info"
-      class="rounded-0"
-    >
-      Drag or zoom the map to populate results.
-    </v-alert>
+      :text="initialInfoMsg"
+    />
 
-    <v-alert
+    <TextAlert
       v-if="listIsFiltered && !mapHasFilteredAirports"
-      dense
-      text
+      :text="noResultsMsg"
       type="warning"
-      class="rounded-0"
-    >
-      No results found.
-    </v-alert>
+    />
 
+    <!-- TODO could be fancy and potentially use only one AirportList here -->
     <AirportList
       v-else-if="!listIsFiltered && mapHasAirports"
       :airports="renderedAirports"
@@ -53,26 +48,27 @@
 
 <script>
 import AirportList from "./AirportList.vue";
+import TextAlert from "./TextAlert.vue";
 
 export default {
   name: "AirportListSheet",
   components: {
     AirportList,
+    TextAlert,
   },
-  props: [
-    "renderedAirports",
-    "filteredAirports",
-  ],
+  props: ["renderedAirports", "filteredAirports"],
   data() {
     return {
       airportsFilter: "",
+      initialInfoMsg: "Drag or zoom the map to populate results.",
+      noResultsMsg: "No results found.",
     };
   },
   computed: {
     mapHasAirports: function () {
       return this.renderedAirports.length > 0;
     },
-    mapHasFilteredAirports: function() {
+    mapHasFilteredAirports: function () {
       return this.filteredAirports.length > 0;
     },
     /**
