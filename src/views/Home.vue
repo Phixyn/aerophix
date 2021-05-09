@@ -1,12 +1,12 @@
 <template>
-  <base-map></base-map>
+  <airport-map></airport-map>
 </template>
 
 <script>
-import BaseMap from "@/components/BaseMap.vue";
+import AirportMap from "@/components/AirportMap.vue";
 
 export default {
   name: "Home",
-  components: { BaseMap },
+  components: { AirportMap },
 };
 </script>

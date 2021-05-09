@@ -23,12 +23,11 @@
 import AirportListSheet from "./AirportListSheet.vue";
 import AirportInfoCard from "./AirportInfoCard.vue";
 
-import axios from "axios";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 export default {
-  name: "BaseMap",
+  name: "AirportMap",
   components: {
     AirportListSheet,
     AirportInfoCard,
