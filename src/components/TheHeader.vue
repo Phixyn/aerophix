@@ -20,8 +20,19 @@
 
     <v-spacer></v-spacer>
 
-    <v-btn text to="/">Home</v-btn>
-    <v-btn text to="/about">About</v-btn>
+    <v-btn
+      text
+      to="/"
+    >
+      Home
+    </v-btn>
+
+    <v-btn
+      text
+      to="/about"
+    >
+      About
+    </v-btn>
 
     <v-btn icon>
       <v-icon>mdi-heart</v-icon>
