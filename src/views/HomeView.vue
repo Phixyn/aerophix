@@ -7,6 +7,8 @@ import AirportMap from "@/components/AirportMap.vue";
 
 export default {
   name: "HomeView",
-  components: { AirportMap },
+  components: {
+    AirportMap
+  },
 };
 </script>
