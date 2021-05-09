@@ -24,7 +24,10 @@
       {{ initialInfoMsg }}
     </text-alert>
 
-    <text-alert v-if="listIsFiltered && !mapHasFilteredAirports" type="warning">
+    <text-alert
+      v-if="listIsFiltered && !mapHasFilteredAirports"
+      type="warning"
+    >
       {{ noResultsMsg }}
     </text-alert>
 

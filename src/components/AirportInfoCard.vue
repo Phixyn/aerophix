@@ -1,12 +1,21 @@
 <template>
   <div>
+    <!-- TODO move to a SheetHeader or something component -->
     <v-sheet class="sheet-header grey lighten-2 px-4 py-2">
-      <v-btn icon title="Back" v-on:click="$emit('navigate-back')">
+      <v-btn
+        icon
+        title="Back"
+        v-on:click="$emit('navigate-back')"
+      >
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
     </v-sheet>
 
-    <v-card class="mx-auto" flat rounded="0">
+    <v-card
+      class="mx-auto"
+      flat
+      rounded="0"
+    >
       <v-img
         class="white--text align-end"
         height="200px"
@@ -24,8 +33,19 @@
       </v-card-text>
 
       <v-card-actions>
-        <v-btn color="orange" text>View</v-btn>
-        <v-btn color="orange" text>Explore</v-btn>
+        <v-btn
+          text
+          color="orange"
+        >
+          View
+        </v-btn>
+
+        <v-btn
+          text
+          color="orange"
+        >
+          Explore
+        </v-btn>
       </v-card-actions>
     </v-card>
   </div>

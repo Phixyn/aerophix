@@ -1,5 +1,10 @@
 <template>
-  <v-alert dense text :type="type" class="rounded-0">
+  <v-alert
+    dense
+    text
+    :type="type"
+    class="rounded-0"
+  >
     <slot></slot>
   </v-alert>
 </template>
