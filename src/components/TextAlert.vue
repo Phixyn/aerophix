@@ -1,6 +1,6 @@
 <template>
   <v-alert dense text :type="type" class="rounded-0">
-    {{ text }}
+    <slot></slot>
   </v-alert>
 </template>
 
@@ -11,10 +11,6 @@ export default {
     type: {
       type: String,
       default: "info",
-    },
-    text: {
-      type: String,
-      required: true,
     },
   },
 };

@@ -20,16 +20,13 @@
       ></v-text-field>
     </v-form> <!-- #airport-search-form -->
 
-    <text-alert
-      v-if="!listIsFiltered && !mapHasAirports"
-      :text="initialInfoMsg"
-    ></text-alert>
+    <text-alert v-if="!listIsFiltered && !mapHasAirports">
+      {{ initialInfoMsg }}
+    </text-alert>
 
-    <text-alert
-      v-if="listIsFiltered && !mapHasFilteredAirports"
-      :text="noResultsMsg"
-      type="warning"
-    ></text-alert>
+    <text-alert v-if="listIsFiltered && !mapHasFilteredAirports" type="warning">
+      {{ noResultsMsg }}
+    </text-alert>
 
     <!-- TODO could be fancy and potentially use only one AirportList here -->
     <airport-list
