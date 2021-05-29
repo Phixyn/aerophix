@@ -1,11 +1,17 @@
 <template>
-  <v-sheet id="map-overlay-local-test" class="fill-height" style="overflow: auto;">
+  <v-sheet
+    id="map-overlay"
+    class="fill-height"
+  >
     <header id="map-overlay-header">
       <slot name="header"></slot>
     </header>
 
     <!-- Main content -->
-    <article id="map-overlay-content" class="fill-height" style="overflow: auto;">
+    <article
+      id="map-overlay-content"
+      class="fill-height"
+    >
       <slot></slot>
     </article>
   </v-sheet> <!-- #map-overlay-content -->
@@ -25,7 +31,7 @@ export default {
   // bottom: 0;
   // width: 50%;
   // max-height: 100%;
-  // overflow: hidden;
+  overflow: auto;
   // font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
@@ -34,6 +40,6 @@ export default {
 }
 
 #map-overlay-content {
-  // TODO
+  overflow: auto;
 }
 </style>
