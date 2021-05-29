@@ -1,10 +1,5 @@
 <template>
   <div>
-    <!-- TODO rename to AirportListView
-
-        This can be a "view" instead, and views can be displayed on
-        sheets?
-    -->
     <airport-search-form
       v-model="airportsFilter"
       v-on:input="$emit('airport-search', $event)"
