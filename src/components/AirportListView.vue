@@ -1,5 +1,6 @@
 <template>
-  <div class="fill-height" style="overflow: auto;">
+<!-- TODO rename this to AirportList -->
+  <div class="fill-height" style="overflow: auto">
     <airport-search-form
       v-model="airportsFilter"
       v-on:input="$emit('airport-search', $event)"
@@ -9,21 +10,36 @@
       {{ initialInfoMsg }}
     </text-alert>
 
-    <text-alert v-if="listIsFiltered && !mapHasFilteredAirports" type="warning">
+    <text-alert
+      v-if="listIsFiltered && !mapHasFilteredAirports"
+      type="warning"
+    >
       {{ noResultsMsg }}
     </text-alert>
 
-    <!-- TODO just add contents of airport-list here and rename this to AirportList -->
-    <airport-list
+    <v-list
       v-if="listHasAirports"
-      :airports="airports"
-      v-on:airport-selected="$emit('airport-selected', $event)"
-    ></airport-list>
+      id="airport-list"
+      class="pa-0"
+      two-line
+    >
+      <!-- class="fill-height"
+      style="overflow: auto;" -->
+      <v-list-item-group v-model="selectedAirport" active-class="pink--text">
+        <airport-list-item
+          v-for="airport in airports"
+          :key="airport.properties['gps_code']"
+          :airport="airport"
+        ></airport-list-item>
+      </v-list-item-group>
+    </v-list>
+    <!-- #airport-list -->
   </div>
 </template>
 
 <script>
-import AirportList from "./AirportList.vue";
+// import AirportList from "./AirportList.vue";
+import AirportListItem from "./AirportListItem.vue";
 import AirportSearchForm from "./AirportSearchForm.vue";
 import TextAlert from "./TextAlert.vue";
 
@@ -31,7 +47,7 @@ export default {
   name: "AirportListView",
 
   components: {
-    AirportList,
+    AirportListItem,
     AirportSearchForm,
     TextAlert,
   },
@@ -44,6 +60,7 @@ export default {
   data() {
     return {
       airportsFilter: "",
+      selectedAirport: null,
       initialInfoMsg: "Drag or zoom the map to populate results.",
       noResultsMsg: "No results found.",
     };
@@ -76,6 +93,30 @@ export default {
     listIsFiltered: function () {
       return this.airportsFilter !== "";
     },
+
+    // selectedAirport: function() {
+    //   // TODO do the one liner thing Pog
+    //   if (this.selected === null) {
+    //     return null;
+    //   }
+
+    //   return this.airports[this.selected];
+    // }
+  },
+
+  watch: {
+    selectedAirport: function (airport) {
+      this.$emit("airport-selected", this.airports[airport]);
+    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+#airport-list {
+  // TODO improve
+  height: 80%;
+  overflow: auto;
+  scrollbar-width: thin;
+}
+</style>
