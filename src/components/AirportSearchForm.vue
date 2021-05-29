@@ -32,9 +32,7 @@ export default {
 
 <style lang="scss" scoped>
 #airport-search-form {
-  // TODO This does nothing lule
-  background-color: red;
   min-height: 10%;
-  height: 50%;
+  height: 18%;
 }
 </style>

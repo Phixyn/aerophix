@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="fill-height" style="overflow: auto;">
     <airport-search-form
       v-model="airportsFilter"
       v-on:input="$emit('airport-search', $event)"

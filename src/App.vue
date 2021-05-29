@@ -1,8 +1,10 @@
 <template>
-  <v-app>
+  <v-app class="fill-height">
     <the-header></the-header>
 
-    <v-main>
+    <!-- Sizes content based on application components -->
+    <!-- TODO investigate if removing this has any effect -->
+    <v-main class="fill-height">
       <!-- Provides the application the proper gutter -->
       <v-container
         fluid
@@ -24,3 +26,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+body {
+  height: 100vh;
+}
+</style>

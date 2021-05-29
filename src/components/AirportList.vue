@@ -1,5 +1,7 @@
 <template>
   <v-list id="airport-list" class="pa-0" two-line>
+    <!-- class="fill-height"
+      style="overflow: auto;" -->
     <v-list-item-group
       v-model="selected"
       active-class="pink--text"
@@ -52,10 +54,10 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #airport-list {
   // TODO improve
-  height: 90%;
+  height: 80%;
   overflow: auto;
   scrollbar-width: thin;
 }
