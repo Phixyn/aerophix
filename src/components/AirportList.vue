@@ -1,5 +1,4 @@
 <template>
-<!-- TODO rename this to AirportList -->
   <div class="fill-height" style="overflow: auto">
     <airport-search-form
       v-model="airportsFilter"
@@ -32,8 +31,7 @@
           :airport="airport"
         ></airport-list-item>
       </v-list-item-group>
-    </v-list>
-    <!-- #airport-list -->
+    </v-list> <!-- #airport-list -->
   </div>
 </template>
 

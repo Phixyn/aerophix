@@ -7,13 +7,13 @@
         </template>
 
         <template v-slot:default>
-          <airport-list-view
+          <airport-list
             v-if="!hasAirportSelected"
             :renderedAirports="renderedAirports"
             :filteredAirports="filteredAirports"
             v-on:airport-search="setAirportFilter"
             v-on:airport-selected="selectAirport"
-          ></airport-list-view>
+          ></airport-list>
 
           <!-- TODO header... MapOverlayHeader or SheetHeader -->
           <airport-info-view
@@ -30,7 +30,7 @@
 
 <script>
 import AirportInfoView from "./AirportInfoView.vue";
-import AirportListView from "./AirportListView.vue";
+import AirportList from "./AirportList.vue";
 import AirportMapOverlay from "./AirportMapOverlay.vue";
 
 import mapboxgl from "mapbox-gl";
@@ -41,7 +41,7 @@ export default {
 
   components: {
     AirportInfoView,
-    AirportListView,
+    AirportList,
     AirportMapOverlay
   },
 
