@@ -1,5 +1,8 @@
 <template>
-  <div class="fill-height" style="overflow: auto">
+  <div
+    id="list-sheet-container"
+    class="fill-height"
+  >
     <airport-search-form
       v-model="airportsFilter"
       v-on:input="$emit('airport-search', $event)"
@@ -22,9 +25,10 @@
       class="pa-0"
       two-line
     >
-      <!-- class="fill-height"
-      style="overflow: auto;" -->
-      <v-list-item-group v-model="selectedAirport" active-class="pink--text">
+      <v-list-item-group
+        v-model="selectedAirport"
+        active-class="pink--text"
+      >
         <airport-list-item
           v-for="airport in airports"
           :key="airport.properties['gps_code']"
@@ -32,11 +36,10 @@
         ></airport-list-item>
       </v-list-item-group>
     </v-list> <!-- #airport-list -->
-  </div>
+  </div> <!-- #list-sheet-container -->
 </template>
 
 <script>
-// import AirportList from "./AirportList.vue";
 import AirportListItem from "./AirportListItem.vue";
 import AirportSearchForm from "./AirportSearchForm.vue";
 import TextAlert from "./TextAlert.vue";
@@ -91,15 +94,6 @@ export default {
     listIsFiltered: function () {
       return this.airportsFilter !== "";
     },
-
-    // selectedAirport: function() {
-    //   // TODO do the one liner thing Pog
-    //   if (this.selected === null) {
-    //     return null;
-    //   }
-
-    //   return this.airports[this.selected];
-    // }
   },
 
   watch: {
@@ -111,9 +105,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#list-sheet-container {
+  overflow: auto;
+}
+
 #airport-list {
   // TODO improve
-  height: 80%;
+  height: 85%;
   overflow: auto;
   scrollbar-width: thin;
 }

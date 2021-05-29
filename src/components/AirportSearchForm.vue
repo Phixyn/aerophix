@@ -32,7 +32,7 @@ export default {
 
 <style lang="scss" scoped>
 #airport-search-form {
-  min-height: 10%;
-  height: 18%;
+  min-height: 5%;
+  max-height: 15%;
 }
 </style>

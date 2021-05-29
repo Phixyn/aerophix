@@ -1,7 +1,13 @@
 <template>
-  <div class="fill-height" style="overflow: auto">
+  <div
+    id="detailed-info-container"
+    class="fill-height"
+  >
     <!-- TODO move to a SheetHeader or something component -->
-    <v-sheet class="sheet-header grey lighten-2 px-4 py-2">
+    <v-sheet
+      id="detailed-info-header"
+      class="grey lighten-2 px-4 py-2"
+    >
       <v-btn
         icon
         title="Back"
@@ -12,6 +18,7 @@
     </v-sheet>
 
     <v-card
+      id="detailed-info-card"
       class="mx-auto"
       flat
       rounded="0"
@@ -48,7 +55,7 @@
         </v-btn>
       </v-card-actions>
     </v-card>
-  </div>
+  </div> <!-- #detailed-info-container -->
 </template>
 
 <script>
@@ -58,7 +65,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.sheet-header {
-  // TODO
+#detailed-info-container {
+  overflow: auto;
+}
+
+#detailed-info-header {
+  min-height: 5%;
+  max-height: 15%;
+}
+
+#detailed-info-card {
+  height: 85%;
+  overflow: auto;
+  scrollbar-width: thin;
 }
 </style>

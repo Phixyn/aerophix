@@ -1,6 +1,12 @@
 <template>
-  <v-row class="fill-height" no-gutters>
-    <v-col cols="3" class="fill-height">
+  <v-row
+    class="fill-height"
+    no-gutters
+  >
+    <v-col
+      cols="3"
+      class="fill-height"
+    >
       <airport-map-overlay>
         <template v-slot:header>
           <!-- TODO -->
@@ -24,7 +30,11 @@
       </airport-map-overlay> <!-- #map-overlay -->
     </v-col>
 
-    <v-col id="map" class="fill-height" cols="9"></v-col>
+    <v-col
+      id="map"
+      cols="9"
+      class="fill-height"
+    ></v-col>
   </v-row>
 </template>
 
