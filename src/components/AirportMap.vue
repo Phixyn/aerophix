@@ -1,27 +1,41 @@
 <template>
-  <v-sheet>
-    <v-sheet id="map-overlay">
-      <airport-list-sheet
-        v-if="!hasAirportSelected"
-        :renderedAirports="renderedAirports"
-        :filteredAirports="filteredAirports"
-        v-on:input-change="setAirportFilter"
-        v-on:airport-selected="selectAirport"
-      ></airport-list-sheet>
+  <v-row class="fill-height" no-gutters>
+    <v-col cols="3" class="fill-height">
+      <airport-map-overlay>
+        <template v-slot:header>
+          <!-- TODO search form... -->
+          <airport-search-form
+            v-on:text-input="setAirportFilter"
+          ></airport-search-form>
+        </template>
 
-      <airport-info-card
-        v-else
-        v-on:navigate-back="unselectAirport"
-      ></airport-info-card>
-    </v-sheet> <!-- #map-overlay -->
+        <template v-slot:default>
+          <airport-list-sheet
+            v-if="!hasAirportSelected"
+            :renderedAirports="renderedAirports"
+            :filteredAirports="filteredAirports"
+            :listIsFiltered="listIsFiltered"
+            v-on:airport-selected="selectAirport"
+          ></airport-list-sheet>
 
-    <div id="map"></div>
-  </v-sheet>
+          <!-- TODO header... MapOverlayHeader or SheetHeader -->
+          <airport-info-card
+            v-else
+            v-on:navigate-back="unselectAirport"
+          ></airport-info-card>
+        </template>
+      </airport-map-overlay> <!-- #map-overlay -->
+    </v-col>
+
+    <v-col id="map" class="fill-height" cols="9"></v-col>
+  </v-row>
 </template>
 
 <script>
-import AirportListSheet from "./AirportListSheet.vue";
 import AirportInfoCard from "./AirportInfoCard.vue";
+import AirportListSheet from "./AirportListSheet.vue";
+import AirportMapOverlay from "./AirportMapOverlay.vue";
+import AirportSearchForm from './AirportSearchForm.vue';
 
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -30,8 +44,10 @@ export default {
   name: "AirportMap",
 
   components: {
+    AirportMapOverlay,
     AirportListSheet,
     AirportInfoCard,
+    AirportSearchForm,
   },
 
   data() {
@@ -66,6 +82,13 @@ export default {
       return (
         this.selectedAirport && Object.keys(this.selectedAirport).length !== 0
       );
+    },
+
+    /**
+     * User has entered text into the input field of the airport search form.
+     */
+    listIsFiltered: function () {
+      return this.airportsFilter !== "";
     },
   },
 
@@ -232,22 +255,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#map {
-  position: absolute;
-  top: 0;
-  left: 25%;
-  bottom: 0;
-  width: 75%;
-}
+// #map {
+//   position: absolute;
+//   top: 0;
+//   left: 25%;
+//   bottom: 0;
+//   width: 50%;
+// }
 
-#map-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 25%;
-  max-height: 100%;
-  overflow: hidden;
-  font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
-}
+// #map-overlay {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   bottom: 0;
+//   width: 25%;
+//   max-height: 100%;
+//   overflow: hidden;
+//   font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+// }
 </style>
