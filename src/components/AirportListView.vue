@@ -13,7 +13,9 @@
       {{ noResultsMsg }}
     </text-alert>
 
+    <!-- TODO just add contents of airport-list here and rename this to AirportList -->
     <airport-list
+      v-if="listHasAirports"
       :airports="airports"
       v-on:airport-selected="$emit('airport-selected', $event)"
     ></airport-list>
@@ -62,6 +64,10 @@ export default {
 
     mapHasFilteredAirports: function () {
       return this.filteredAirports.length > 0;
+    },
+
+    listHasAirports: function () {
+      return this.airports.length > 0;
     },
 
     /**
