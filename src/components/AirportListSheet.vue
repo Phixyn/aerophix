@@ -5,6 +5,10 @@
         This can be a "view" instead, and views can be displayed on
         sheets?
     -->
+    <airport-search-form
+      v-model="airportsFilter"
+      v-on:input="$emit('airport-search', $event)"
+    ></airport-search-form>
 
     <text-alert v-if="!listIsFiltered && !mapHasAirports">
       {{ initialInfoMsg }}
@@ -23,6 +27,7 @@
 
 <script>
 import AirportList from "./AirportList.vue";
+import AirportSearchForm from "./AirportSearchForm.vue";
 import TextAlert from "./TextAlert.vue";
 
 export default {
@@ -30,13 +35,13 @@ export default {
 
   components: {
     AirportList,
+    AirportSearchForm,
     TextAlert,
   },
 
   props: [
     "renderedAirports",
-    "filteredAirports",
-    "listIsFiltered",
+    "filteredAirports"
   ],
 
   data() {
@@ -62,6 +67,13 @@ export default {
 
     mapHasFilteredAirports: function () {
       return this.filteredAirports.length > 0;
+    },
+
+    /**
+     * User has entered text into the input field of the airport search form.
+     */
+    listIsFiltered: function () {
+      return this.airportsFilter !== "";
     },
   },
 };

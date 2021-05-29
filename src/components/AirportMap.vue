@@ -3,10 +3,7 @@
     <v-col cols="3" class="fill-height">
       <airport-map-overlay>
         <template v-slot:header>
-          <!-- TODO search form... -->
-          <airport-search-form
-            v-on:text-input="setAirportFilter"
-          ></airport-search-form>
+          <!-- TODO -->
         </template>
 
         <template v-slot:default>
@@ -14,7 +11,7 @@
             v-if="!hasAirportSelected"
             :renderedAirports="renderedAirports"
             :filteredAirports="filteredAirports"
-            :listIsFiltered="listIsFiltered"
+            v-on:airport-search="setAirportFilter"
             v-on:airport-selected="selectAirport"
           ></airport-list-sheet>
 
@@ -35,7 +32,6 @@
 import AirportInfoCard from "./AirportInfoCard.vue";
 import AirportListSheet from "./AirportListSheet.vue";
 import AirportMapOverlay from "./AirportMapOverlay.vue";
-import AirportSearchForm from './AirportSearchForm.vue';
 
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -47,7 +43,6 @@ export default {
     AirportMapOverlay,
     AirportListSheet,
     AirportInfoCard,
-    AirportSearchForm,
   },
 
   data() {
@@ -82,13 +77,6 @@ export default {
       return (
         this.selectedAirport && Object.keys(this.selectedAirport).length !== 0
       );
-    },
-
-    /**
-     * User has entered text into the input field of the airport search form.
-     */
-    listIsFiltered: function () {
-      return this.airportsFilter !== "";
     },
   },
 
