@@ -16,10 +16,10 @@
           ></airport-list>
 
           <!-- TODO header... MapOverlayHeader or SheetHeader -->
-          <airport-info-view
+          <airport-detailed-info
             v-else
             v-on:navigate-back="unselectAirport"
-          ></airport-info-view>
+          ></airport-detailed-info>
         </template>
       </airport-map-overlay> <!-- #map-overlay -->
     </v-col>
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import AirportInfoView from "./AirportInfoView.vue";
+import AirportDetailedInfo from "./AirportDetailedInfo.vue";
 import AirportList from "./AirportList.vue";
 import AirportMapOverlay from "./AirportMapOverlay.vue";
 
@@ -40,7 +40,7 @@ export default {
   name: "AirportMap",
 
   components: {
-    AirportInfoView,
+    AirportDetailedInfo,
     AirportList,
     AirportMapOverlay
   },

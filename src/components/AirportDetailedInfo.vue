@@ -1,5 +1,5 @@
 <template>
-  <!-- TODO rename to AirportInfoView -->
+  <!-- TODO needs fill-height -->
   <div>
     <!-- TODO move to a SheetHeader or something component -->
     <v-sheet class="sheet-header grey lighten-2 px-4 py-2">
@@ -45,7 +45,7 @@
           text
           color="orange"
         >
-          Explore
+          Set as current
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -54,7 +54,7 @@
 
 <script>
 export default {
-  name: "AirportInfoView",
+  name: "AirportDetailedInfo",
 };
 </script>
 
