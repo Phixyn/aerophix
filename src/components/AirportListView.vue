@@ -26,7 +26,7 @@ import AirportSearchForm from "./AirportSearchForm.vue";
 import TextAlert from "./TextAlert.vue";
 
 export default {
-  name: "AirportListSheet",
+  name: "AirportListView",
 
   components: {
     AirportList,

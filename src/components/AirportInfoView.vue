@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO rename to AirportInfoView -->
   <div>
     <!-- TODO move to a SheetHeader or something component -->
     <v-sheet class="sheet-header grey lighten-2 px-4 py-2">
@@ -53,7 +54,7 @@
 
 <script>
 export default {
-  name: "AirportInfoCard",
+  name: "AirportInfoView",
 };
 </script>
 
