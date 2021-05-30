@@ -69,8 +69,8 @@ export default {
 
   computed: {
     airports: function () {
-      if (this.listIsFiltered && this.mapHasFilteredAirports) {
-        return this.filteredAirports;
+      if (this.listIsFiltered) {
+        return this.mapHasFilteredAirports ? this.filteredAirports : {};
       }
 
       return this.renderedAirports;
